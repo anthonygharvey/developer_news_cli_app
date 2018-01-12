@@ -32,6 +32,26 @@ shows a list of top 3 articles from each website
 	1
 	Article 1 summary
 
+	2
+	Article 2 summary
+
+	fcc
+	displays the 10 most recent fcc articles
+
+	hn
+	displays the 10 most recent hn articles
+
+	1
+	displays article 1 summary from hn
+
+	5
+	displays article 5 summary from hn
+
+	list
+	displays the main list of top 3 articles from each website
+
+	exit
+	thanks the user for using the app and exits
 ___
 
 
