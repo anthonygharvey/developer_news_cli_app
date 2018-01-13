@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/developer_news_cli_app'
+require_relative '../lib/developer_news_cli_app'
 
 DeveloperNewsCliApp::CLI.new.call

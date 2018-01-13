@@ -66,7 +66,7 @@ baseCS (BCS)
 				puts "Article 1..."
 			when "2"
 				puts "Article 2..."
-			when ("FCC" || "HN" || "CB" || "BCS") #TODO: case statement doesn't recognize or operators
+			when "FCC", "HN", "CB", "BCS"
 				site_articles(input)
 			when "LIST"
 				list_articles
