@@ -5,6 +5,4 @@ module DeveloperNewsCliApp
   # Your code goes here...
 end
 
-# setup my environment
-
 
