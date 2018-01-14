@@ -59,37 +59,26 @@ ___
 check the terms of service for the websites
 if they prohibit scraping, just email them and let them know I'm a Flatiron student and I'd like to scrape the website for a project and publish it to rubygems and that it is not for profit.
 
-### Info to display on full article
-grab the author's name and info
-maybe use Mechanize to click around on the webpage? (Medium clicks)
 
-### CLI workflow
-
-def DeveloperNewsCliApp::CLI.call
-	developer_news::Scraper.new.make_articles
-	list
+### CLI Workflow
+def call
+	DeveloperNewsCliApp::Scraper.new.get_articles
+	start
 end
 
 
 
-
-### Scraper
-
-def DeveloperNewsCliApp::Scrapper(page)
-	Nokogiri::HTML(open(page))
+### Scraper workflow
+def get_articles
+	DeveloperNewsCliApp::FreeCodeCampScrapper.make_artciles
+	DeveloperNewsCliApp::HackerNewsScrapper.make_artciles
+	DeveloperNewsCliApp::CodeBurstScrapper.make_artciles
+	DeveloperNewsCliApp::BaseCSScrapper.make_artciles
 end
 
+
+
+### Scrapper workflow
 def make_articles
-	make_fcc_articles
-	make_hn_articles
-	make_cb_articles
-	make_bcs_articles
+	use Nokoguri to scrape article information from the homepage and create new articles from the Article class; which stores all of the articles in the @@all class variable
 end
-
-def make_fcc_artcies
-	s
-end
-
-
-
-

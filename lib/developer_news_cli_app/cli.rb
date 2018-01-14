@@ -7,6 +7,7 @@ class DeveloperNewsCliApp::CLI
 	end
 	
 	def list_articles
+		@articles = DeveloperNewsCliApp::Article.new
 		puts "Today's top developer articles:"
 		puts ""
 		puts <<-DOC
