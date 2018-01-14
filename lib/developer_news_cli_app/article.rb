@@ -1,7 +1,7 @@
 class DeveloperNewsCliApp::Article
 	# should have a name, author, date, read-time, url, intro
 	# should belong to a website
-	attr_accessor :title, :author, :date, :read_time, :url, :intro, :website
+	attr_accessor :title, :author, :date, :read_time, :url, :website
 
 	@@all = []
 
@@ -17,6 +17,12 @@ class DeveloperNewsCliApp::Article
 
 	def self.all
 		@@all
+	end
+
+	def self.print_titles
+		self.all.each do |article|
+			puts "#{article.title}"
+		end
 	end
 
 end

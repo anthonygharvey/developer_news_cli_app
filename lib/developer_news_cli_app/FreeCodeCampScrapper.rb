@@ -1,6 +1,5 @@
 class DeveloperNewsCliApp::FreeCodeCampScrapper
 
-	#title = get_page.css(".postArticle h3")[0].text
 	def get_page
 		page = Nokogiri::HTML(open("https://medium.freecodecamp.org/"))
 	end
@@ -18,8 +17,6 @@ class DeveloperNewsCliApp::FreeCodeCampScrapper
 			a.read_time = article.css(".readingTime").attribute("title").value
 			a.url = article.css(".postArticle-readMore a").attribute("href").value
 			a.website = "FreeCodeCamp"
-			# DeveloperNewsCliApp::Article.all << self
-			# binding.pry
 		end
 	end
 
