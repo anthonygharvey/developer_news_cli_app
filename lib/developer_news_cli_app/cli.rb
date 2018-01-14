@@ -1,9 +1,14 @@
 class DeveloperNewsCliApp::CLI
 	
 	def call
+		get_articles
 		list_articles
 		menu
 		goodbye
+	end
+
+	def get_articles
+		DeveloperNewsCliApp::FreeCodeCampScrapper.new.make_article
 	end
 	
 	def list_articles

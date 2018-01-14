@@ -62,18 +62,21 @@ if they prohibit scraping, just email them and let them know I'm a Flatiron stud
 
 ### CLI Workflow
 def call
-	DeveloperNewsCliApp::Scraper.new.get_articles
+	get_articles
 	start
+end
+
+def get_articles
+	DeveloperNewsCliApp::FreeCodeCampScrapper.make_artciles
+	DeveloperNewsCliApp::HackerNewsScrapper.make_artciles
+	DeveloperNewsCliApp::CodeBurstScrapper.make_artciles
+	DeveloperNewsCliApp::BaseCSScrapper.make_artciles
 end
 
 
 
 ### Scraper workflow
 def get_articles
-	DeveloperNewsCliApp::FreeCodeCampScrapper.make_artciles
-	DeveloperNewsCliApp::HackerNewsScrapper.make_artciles
-	DeveloperNewsCliApp::CodeBurstScrapper.make_artciles
-	DeveloperNewsCliApp::BaseCSScrapper.make_artciles
 end
 
 
