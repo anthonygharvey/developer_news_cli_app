@@ -62,3 +62,34 @@ if they prohibit scraping, just email them and let them know I'm a Flatiron stud
 ### Info to display on full article
 grab the author's name and info
 maybe use Mechanize to click around on the webpage? (Medium clicks)
+
+### CLI workflow
+
+def DeveloperNewsCliApp::CLI.call
+	developer_news::Scraper.new.make_articles
+	list
+end
+
+
+
+
+### Scraper
+
+def DeveloperNewsCliApp::Scrapper(page)
+	Nokogiri::HTML(open(page))
+end
+
+def make_articles
+	make_fcc_articles
+	make_hn_articles
+	make_cb_articles
+	make_bcs_articles
+end
+
+def make_fcc_artcies
+	s
+end
+
+
+
+
