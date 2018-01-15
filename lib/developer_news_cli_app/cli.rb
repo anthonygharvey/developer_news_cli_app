@@ -22,12 +22,13 @@ class DeveloperNewsCliApp::CLI
 	end
 	
 	def display_summaries
+		DeveloperNewsCliApp::Article.clear_current_articles
 		puts "Free Code Camp (FCC)"
-		DeveloperNewsCliApp::Article.display_top_three("FreeCodeCamp")
+		DeveloperNewsCliApp::Article.add_to_current_artciles(DeveloperNewsCliApp::Article.display_top_three("FreeCodeCamp"))
 		puts "HackerNoon (HN)"
-		DeveloperNewsCliApp::Article.display_top_three("HackerNoon")
+		DeveloperNewsCliApp::Article.add_to_current_artciles(DeveloperNewsCliApp::Article.display_top_three("HackerNoon"))
 		puts "CodeBurst (CB)"
-		DeveloperNewsCliApp::Article.display_top_three("CodeBurst")
+		DeveloperNewsCliApp::Article.add_to_current_artciles(DeveloperNewsCliApp::Article.display_top_three("CodeBurst"))
 	end
 
 	def site_articles(site)
