@@ -1,4 +1,5 @@
 class DeveloperNewsCliApp::HackerNoonScrapper
+	@@all = []
 
 	def get_page
 		page = Nokogiri::HTML(open("https://hackernoon.com/"))
@@ -17,7 +18,12 @@ class DeveloperNewsCliApp::HackerNoonScrapper
 			a.url = article.css("a").attribute("href").value
 			a.website = "HackerNoon"
 			a.trailing = article.css(".u-fontSize18").text
+			@@all << self
 		end
+	end
+
+	def articles
+		@@all
 	end
 
 end

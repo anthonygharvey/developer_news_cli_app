@@ -4,7 +4,6 @@ class DeveloperNewsCliApp::Article
 	attr_accessor :title, :author, :date, :read_time, :url, :website, :subtitle, :trailing
 
 	@@all = []
-	@@current_articles = []
 
 	def initialize(title = nil, author = nil, date = nil, read_time = nil, url = nil, website = nil, subtile = nil, trailing = nil)
 		@title = title
@@ -16,6 +15,7 @@ class DeveloperNewsCliApp::Article
 		@subtitle = subtile
 		@trailing = trailing
 		@@all << self
+		# @@current_articles << self
 	end
 
 	def self.all

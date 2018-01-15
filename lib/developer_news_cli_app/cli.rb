@@ -1,12 +1,19 @@
 class DeveloperNewsCliApp::CLI
 	@@websites = ["FreeCodeCamp", "HackerNoon", "CodeBurst"]
+	@@FreeCodeCampArticles = []
 
 	def call
+		welcome
 		list_websites
-		# get_articles
+		initial_instructions
+		get_articles
 		# list_articles
 		# menu
 		# goodbye
+	end
+
+	def welcome
+		puts "Welcome to the Developer News CLI App."
 	end
 
 	def websites
@@ -15,6 +22,11 @@ class DeveloperNewsCliApp::CLI
 
 	def list_websites
 		self.websites.each.with_index(1){|website, index| puts"#{index}. #{website}"}
+	end
+
+	def initial_instructions
+		puts "Please type the number of the website to see more of its articles"
+		puts "Or type exit to end the program"
 	end
 
 	def get_articles

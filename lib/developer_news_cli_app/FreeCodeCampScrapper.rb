@@ -1,4 +1,5 @@
 class DeveloperNewsCliApp::FreeCodeCampScrapper
+	@@all = []
 
 	def get_page
 		page = Nokogiri::HTML(open("https://medium.freecodecamp.org/"))
@@ -19,10 +20,12 @@ class DeveloperNewsCliApp::FreeCodeCampScrapper
 			a.website = "FreeCodeCamp"
 			a.subtitle = article.css("h4").text
 			a.trailing = article.css("p").text
+			@@all << self
 		end
 	end
 
-
-
+	def articles
+		@@all
+	end
 
 end

@@ -1,4 +1,6 @@
 class DeveloperNewsCliApp::CodeBurstScrapper
+	@@all = []
+
 	def get_page
 		page = Nokogiri::HTML(open("https://codeburst.io/"))
 	end
@@ -16,7 +18,12 @@ class DeveloperNewsCliApp::CodeBurstScrapper
 			a.url = article.css("a").attribute("href").value
 			a.website = "CodeBurst"
 			a.trailing = article.search(".u-fontSize18").text
+			@@all << self
 		end
+	end
+	
+	def articles
+		@@all
 	end
 
 end
