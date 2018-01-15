@@ -1,17 +1,26 @@
 class DeveloperNewsCliApp::CLI
-	
+	@@websites = ["FreeCodeCamp", "HackerNoon", "CodeBurst"]
+
 	def call
-		get_articles
-		list_articles
-		menu
-		goodbye
+		list_websites
+		# get_articles
+		# list_articles
+		# menu
+		# goodbye
+	end
+
+	def websites
+		@@websites
+	end
+
+	def list_websites
+		self.websites.each.with_index(1){|website, index| puts"#{index}. #{website}"}
 	end
 
 	def get_articles
 		DeveloperNewsCliApp::FreeCodeCampScrapper.new.make_article
 		DeveloperNewsCliApp::HackerNoonScrapper.new.make_article
 		DeveloperNewsCliApp::CodeBurstScrapper.new.make_article
-		# binding.pry
 	end
 	
 	def list_articles
