@@ -17,6 +17,8 @@ class DeveloperNewsCliApp::FreeCodeCampScrapper
 			a.read_time = article.css(".readingTime").attribute("title").value
 			a.url = article.css(".postArticle-readMore a").attribute("href").value
 			a.website = "FreeCodeCamp"
+			a.subtitle = article.css("h4").value
+			a.trailing = article.css("p").value
 		end
 	end
 
