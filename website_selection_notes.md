@@ -41,4 +41,10 @@ Type read or r to open the article in your browser.
 Type back to go back to the list of #{website} articles.
 Type list to see a list of websites.
 Type exit to exit the program.
+```
 
+
+**Open a website**
+```
+`open #{DeveloperNewsCliApp::FreeCodeCampScrapper.articles[-1].url}`
+```

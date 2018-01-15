@@ -18,11 +18,11 @@ class DeveloperNewsCliApp::HackerNoonScrapper
 			a.url = article.css("a").attribute("href").value
 			a.website = "HackerNoon"
 			a.trailing = article.css(".u-fontSize18").text
-			@@all << self
+			@@all << a
 		end
 	end
 
-	def articles
+	def self.articles
 		@@all
 	end
 

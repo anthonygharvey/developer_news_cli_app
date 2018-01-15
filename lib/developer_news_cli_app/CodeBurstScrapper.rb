@@ -18,11 +18,11 @@ class DeveloperNewsCliApp::CodeBurstScrapper
 			a.url = article.css("a").attribute("href").value
 			a.website = "CodeBurst"
 			a.trailing = article.search(".u-fontSize18").text
-			@@all << self
+			@@all << a
 		end
 	end
 	
-	def articles
+	def self.articles
 		@@all
 	end
 

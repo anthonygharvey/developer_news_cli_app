@@ -4,9 +4,11 @@ class DeveloperNewsCliApp::CLI
 
 	def call
 		welcome
-		list_websites
-		initial_instructions
 		get_articles
+		initial_instructions
+		list_websites
+		# binding.pry
+		# `open #{DeveloperNewsCliApp::FreeCodeCampScrapper.articles[-1].url}`
 		# list_articles
 		# menu
 		# goodbye
@@ -14,6 +16,7 @@ class DeveloperNewsCliApp::CLI
 
 	def welcome
 		puts "Welcome to the Developer News CLI App."
+		puts "Scrapping the websties now..."
 	end
 
 	def websites

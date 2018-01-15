@@ -20,11 +20,11 @@ class DeveloperNewsCliApp::FreeCodeCampScrapper
 			a.website = "FreeCodeCamp"
 			a.subtitle = article.css("h4").text
 			a.trailing = article.css("p").text
-			@@all << self
+			@@all << a
 		end
 	end
 
-	def articles
+	def self.articles
 		@@all
 	end
 
