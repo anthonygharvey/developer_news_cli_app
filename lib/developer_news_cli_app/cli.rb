@@ -9,38 +9,19 @@ class DeveloperNewsCliApp::CLI
 
 	def get_articles
 		DeveloperNewsCliApp::FreeCodeCampScrapper.new.make_article
+		DeveloperNewsCliApp::HackerNoonScrapper.new.make_article
+		DeveloperNewsCliApp::CodeBurstScrapper.new.make_article
+		# binding.pry
 	end
 	
 	def list_articles
-		@articles = DeveloperNewsCliApp::Article.new
 		puts "Today's top developer articles:"
 		puts ""
-		puts <<-DOC
-freeCodeCamp (FCC)
-  1. The unlikely history of the #100DaysOfCode Challenge, and why you should try it for 2018
-  2. An Introduction to React Router v4 and its Philosophy Toward Routing
-  3. Why we should convice our users to update their browsers - it's a win-win
-
-HackerNoon (HN)
-  4. Will Robots Become Designers?  3 Tech Design Leaders Are Skeptical
-  5. I'm harvesting credit card numbers and passwords from your site.  Here's how.
-  6. Founder Interview: How Codacy Uses Codacy to Build Codacy.
-
-Codeburst (CB)
-  7. Focus on scales - d3.js integration
-  8. What Did I Learn in 2017?
-  9. How Operating Sytems Work: 10 Concepts you Should Know as a developer
-
-baseCS (BCS)
-  10. A Most Perfect Union: Just-In-Time Compilers
-  11. A Deeper Inspection Into Compilation And Interpolation
-  12. Leveling Up One's Parsing Game with ASTs
-		DOC
+		display_summaries
 		puts ""
 	end
 
 	def site_articles(site)
-		# binding.pry
 		case site
 		when "FCC"
 			puts "FCC articles 1 - 10!!!"
@@ -53,6 +34,15 @@ baseCS (BCS)
 		end
 		puts ""
 		menu
+	end
+
+	def display_summaries
+		puts "Free Code Camp (FCC)"
+		DeveloperNewsCliApp::Article.display_top_three("FreeCodeCamp")
+		puts "HackerNoon (HN)"
+		DeveloperNewsCliApp::Article.display_top_three("HackerNoon")
+		puts "CodeBurst (CB)"
+		DeveloperNewsCliApp::Article.display_top_three("CodeBurst")
 	end
 
 	def list_site_articles

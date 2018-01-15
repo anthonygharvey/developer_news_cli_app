@@ -27,4 +27,21 @@ class DeveloperNewsCliApp::Article
 		end
 	end
 
+	def self.website(website)
+		articles = []
+		self.all.each do |article|
+			if article.website == website
+				# puts "#{article.title} - #{article.website}"
+				articles << article
+			end
+		end
+		articles
+	end
+
+	def self.display_top_three(website)
+		self.website(website)[0..2].each.with_index(1) do |article, index|
+			puts "  #{index}. #{article.title}"
+		end
+	end
+
 end
