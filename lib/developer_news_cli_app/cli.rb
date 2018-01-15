@@ -20,22 +20,7 @@ class DeveloperNewsCliApp::CLI
 		display_summaries
 		puts ""
 	end
-
-	def site_articles(site)
-		case site
-		when "FCC"
-			puts "FCC articles 1 - 10!!!"
-		when "HN"
-			puts "HN articles 1 - 10!!!"
-		when "CB"
-			puts "CB articles 1 - 10!!!"
-		when "BCS"
-			puts "BCS articles 1 - 10!!1"
-		end
-		puts ""
-		menu
-	end
-
+	
 	def display_summaries
 		puts "Free Code Camp (FCC)"
 		DeveloperNewsCliApp::Article.display_top_three("FreeCodeCamp")
@@ -44,6 +29,20 @@ class DeveloperNewsCliApp::CLI
 		puts "CodeBurst (CB)"
 		DeveloperNewsCliApp::Article.display_top_three("CodeBurst")
 	end
+
+	def site_articles(site)
+		case site
+		when "FCC"
+			DeveloperNewsCliApp::Article.display_articles("FreeCodeCamp")
+		when "HN"
+			DeveloperNewsCliApp::Article.display_articles("HackerNoon")
+		when "CB"
+			DeveloperNewsCliApp::Article.display_articles("CodeBurst")
+		end
+		puts ""
+		menu
+	end
+
 
 	def list_site_articles
 	end
@@ -62,7 +61,7 @@ class DeveloperNewsCliApp::CLI
 				puts "Article 1..."
 			when "2"
 				puts "Article 2..."
-			when "FCC", "HN", "CB", "BCS"
+			when "FCC", "HN", "CB"
 				site_articles(input)
 			when "LIST"
 				list_articles

@@ -44,4 +44,11 @@ class DeveloperNewsCliApp::Article
 		end
 	end
 
+	def self.display_articles(site)
+		puts "#{site}:\n"
+		self.website(site)[0..9].each.with_index(1) do |article, index|
+			puts "  #{index}. #{article.title}"
+		end
+	end
+
 end
