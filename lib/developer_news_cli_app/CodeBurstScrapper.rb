@@ -26,4 +26,8 @@ class DeveloperNewsCliApp::CodeBurstScrapper
 		@@all
 	end
 
+	def self.article_count
+		@@all.count
+	end
+
 end

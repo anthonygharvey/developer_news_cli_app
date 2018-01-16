@@ -1,13 +1,15 @@
 class DeveloperNewsCliApp::CLI
 	@@websites = ["FreeCodeCamp", "HackerNoon", "CodeBurst"]
-	@@FreeCodeCampArticles = []
+	# @@FreeCodeCampArticles = []
+	@@current_article_count = 0
 
 	def call
 		welcome
 		get_articles
 		list_websites
 		initial_instructions
-		get_input
+		get_website_input
+		get_article_selection
 		# binding.pry
 		# `open #{DeveloperNewsCliApp::FreeCodeCampScrapper.articles[-1].url}`
 		# list_articles
@@ -24,6 +26,21 @@ class DeveloperNewsCliApp::CLI
 		@@websites
 	end
 
+	def current_article_count
+		@@current_article_count
+	end
+
+	def update_current_article_count(website)
+		case website
+		when "FreeCodeCamp"
+			@@current_article_count = DeveloperNewsCliApp::FreeCodeCampScrapper.article_count
+		when "HackerNoon"
+			@@current_article_count = DeveloperNewsCliApp::HackerNoonScrapper.article_count
+		when "CodeBurst"
+			@@current_article_count = DeveloperNewsCliApp::CodeBurstScrapper.article_count
+		end
+	end
+
 	def list_websites
 		self.websites.each.with_index(1){|website, index| puts"#{index}. #{website}"}
 	end
@@ -33,7 +50,7 @@ class DeveloperNewsCliApp::CLI
 		puts "Or type exit to end the program"
 	end
 
-	def get_input
+	def get_website_input
 		input = nil
 		while input != "exit"
 			input = gets.strip
@@ -41,30 +58,49 @@ class DeveloperNewsCliApp::CLI
 			case input
 			when "1"
 				show_FreeCodeCampArticles
+				article_selection_instructions
+				update_current_article_count("FreeCodeCamp")
+				binding.pry
 			when "2"
 				show_HackerNoonArticles
+				article_selection_instructions
+				update_current_article_count("HackerNoon")
 			when "3"
 				show_CodeBurstArticles
+				article_selection_instructions
+				update_current_article_count("CodeBurst")
+			when "exit"
+				goodbye
 			end
 		end
 	end
 
+	def article_selection_instructions
+		puts "\nType the number of an article to see more information about it."
+		puts "Or type list to see a list of websites."
+		puts "Or type exit to end the program."
+	end
+
+	def get_article_selection
+		input = nil
+	end
+
 	def show_FreeCodeCampArticles
-		puts "FreeCodeCamp:\n"
+		puts "\nFreeCodeCamp:\n"
 		DeveloperNewsCliApp::FreeCodeCampScrapper.articles.each.with_index(1) do |article, index|
 			puts "#{index}. #{article.title}"
 		end
 	end
 
 	def show_HackerNoonArticles
-		puts "HackerNoon:\n"
+		puts "\nHackerNoon:\n"
 		DeveloperNewsCliApp::HackerNoonScrapper.articles.each.with_index(1) do |article, index|
 			puts "#{index}. #{article.title}"
 		end
 	end
 
 	def show_CodeBurstArticles
-		puts "CodeBurst:\n"
+		puts "\nCodeBurst:\n"
 		DeveloperNewsCliApp::CodeBurstScrapper.articles.each.with_index(1) do |article, index|
 			puts "#{index}. #{article.title}"
 		end
