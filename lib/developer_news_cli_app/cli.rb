@@ -2,6 +2,8 @@ class DeveloperNewsCliApp::CLI
 	@@websites = ["FreeCodeCamp", "HackerNoon", "CodeBurst"]
 	# @@FreeCodeCampArticles = []
 	@@current_article_count = 0
+	@@current_website = ""
+	@@current_articles = []
 
 	def call
 		welcome
@@ -57,18 +59,27 @@ class DeveloperNewsCliApp::CLI
 			# binding.pry
 			case input
 			when "1"
+				@@current_website = "FreeCodeCamp"
 				show_FreeCodeCampArticles
 				article_selection_instructions
 				update_current_article_count("FreeCodeCamp")
-				binding.pry
+				@@current_articles = DeveloperNewsCliApp::FreeCodeCampScrapper.articles
+				get_article_selection
+				# binding.pry
 			when "2"
+				@@current_website = "HackerNoon"
 				show_HackerNoonArticles
 				article_selection_instructions
 				update_current_article_count("HackerNoon")
+				@@current_articles = DeveloperNewsCliApp::HackerNoonScrapper.articles
+				get_article_selection
 			when "3"
+				@@current_website = "CodeBurst"
 				show_CodeBurstArticles
 				article_selection_instructions
 				update_current_article_count("CodeBurst")
+				@@current_articles = DeveloperNewsCliApp::CodeBurstScrapper.articles
+				get_article_selection
 			when "exit"
 				goodbye
 			end
@@ -83,6 +94,16 @@ class DeveloperNewsCliApp::CLI
 
 	def get_article_selection
 		input = nil
+		max_number = @@current_articles.count
+		input = gets.strip.to_i
+		if input <= max_number
+			puts "#{@@current_articles[input.to_i - 1].title}"
+		elsif input == 0
+			goodbye
+		else
+			get_article_selection
+		end
+		
 	end
 
 	def show_FreeCodeCampArticles
