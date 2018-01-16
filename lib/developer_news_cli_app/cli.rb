@@ -97,13 +97,30 @@ class DeveloperNewsCliApp::CLI
 		max_number = @@current_articles.count
 		input = gets.strip.to_i
 		if input <= max_number
-			puts "#{@@current_articles[input.to_i - 1].title}"
+			print_summary(@@current_articles[input.to_i - 1])
 		elsif input == 0
 			goodbye
 		else
 			get_article_selection
 		end
-		
+	end
+
+	def print_summary(article)
+		puts "---------- #{@@current_website} ----------"
+		puts "Title: #{article.title}"
+		if	article.subtitle != nil
+			puts "Subtitle: #{article.subtitle}"
+		end
+		if article.trailing != nil
+			puts "Trailing: #{article.trailing}"
+		end
+		puts "Author: #{article.author}"
+		if article.date != nil
+			puts "Date: #{article.date}"
+		end
+		if article.read_time != nil
+			puts "Read Time: #{article.read_time}"
+		end	
 	end
 
 	def show_FreeCodeCampArticles
