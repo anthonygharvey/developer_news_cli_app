@@ -5,15 +5,16 @@ class DeveloperNewsCliApp::CLI
 	def call
 		welcome
 		get_articles
-		initial_instructions
 		list_websites
+		initial_instructions
+		get_input
 		# binding.pry
 		# `open #{DeveloperNewsCliApp::FreeCodeCampScrapper.articles[-1].url}`
 		# list_articles
 		# menu
 		# goodbye
 	end
-
+	
 	def welcome
 		puts "Welcome to the Developer News CLI App."
 		puts "Scrapping the websties now..."
@@ -30,6 +31,43 @@ class DeveloperNewsCliApp::CLI
 	def initial_instructions
 		puts "Please type the number of the website to see more of its articles"
 		puts "Or type exit to end the program"
+	end
+
+	def get_input
+		input = nil
+		while input != "exit"
+			input = gets.strip
+			# binding.pry
+			case input
+			when "1"
+				show_FreeCodeCampArticles
+			when "2"
+				show_HackerNoonArticles
+			when "3"
+				show_CodeBurstArticles
+			end
+		end
+	end
+
+	def show_FreeCodeCampArticles
+		puts "FreeCodeCamp:\n"
+		DeveloperNewsCliApp::FreeCodeCampScrapper.articles.each.with_index(1) do |article, index|
+			puts "#{index}. #{article.title}"
+		end
+	end
+
+	def show_HackerNoonArticles
+		puts "HackerNoon:\n"
+		DeveloperNewsCliApp::HackerNoonScrapper.articles.each.with_index(1) do |article, index|
+			puts "#{index}. #{article.title}"
+		end
+	end
+
+	def show_CodeBurstArticles
+		puts "CodeBurst:\n"
+		DeveloperNewsCliApp::CodeBurstScrapper.articles.each.with_index(1) do |article, index|
+			puts "#{index}. #{article.title}"
+		end
 	end
 
 	def get_articles
