@@ -1,6 +1,5 @@
 class DeveloperNewsCliApp::CLI
 	@@websites = ["FreeCodeCamp", "HackerNoon", "CodeBurst"]
-	# @@FreeCodeCampArticles = []
 	@@current_article_count = 0
 	@@current_website = ""
 	@@current_articles = []
@@ -10,13 +9,7 @@ class DeveloperNewsCliApp::CLI
 		get_articles
 		list_websites
 		initial_instructions
-		get_website_input
 		get_article_selection
-		# binding.pry
-		# `open #{DeveloperNewsCliApp::FreeCodeCampScrapper.articles[-1].url}`
-		# list_articles
-		# menu
-		# goodbye
 	end
 	
 	def welcome
@@ -24,23 +17,10 @@ class DeveloperNewsCliApp::CLI
 		puts "Scrapping the websties now..."
 	end
 
-	def websites
-		@@websites
-	end
-
-	def current_article_count
-		@@current_article_count
-	end
-
-	def update_current_article_count(website)
-		case website
-		when "FreeCodeCamp"
-			@@current_article_count = DeveloperNewsCliApp::FreeCodeCampScrapper.article_count
-		when "HackerNoon"
-			@@current_article_count = DeveloperNewsCliApp::HackerNoonScrapper.article_count
-		when "CodeBurst"
-			@@current_article_count = DeveloperNewsCliApp::CodeBurstScrapper.article_count
-		end
+	def get_articles
+		DeveloperNewsCliApp::FreeCodeCampScrapper.new.make_article
+		DeveloperNewsCliApp::HackerNoonScrapper.new.make_article
+		DeveloperNewsCliApp::CodeBurstScrapper.new.make_article
 	end
 
 	def list_websites
@@ -50,39 +30,39 @@ class DeveloperNewsCliApp::CLI
 	def initial_instructions
 		puts "Please type the number of the website to see more of its articles"
 		puts "Or type exit to end the program"
+		get_website_input
 	end
 
 	def get_website_input
 		input = nil
-		while input != "exit"
-			input = gets.strip
-			# binding.pry
-			case input
-			when "1"
-				@@current_website = "FreeCodeCamp"
-				show_FreeCodeCampArticles
-				article_selection_instructions
-				update_current_article_count("FreeCodeCamp")
-				@@current_articles = DeveloperNewsCliApp::FreeCodeCampScrapper.articles
-				get_article_selection
-				# binding.pry
-			when "2"
-				@@current_website = "HackerNoon"
-				show_HackerNoonArticles
-				article_selection_instructions
-				update_current_article_count("HackerNoon")
-				@@current_articles = DeveloperNewsCliApp::HackerNoonScrapper.articles
-				get_article_selection
-			when "3"
-				@@current_website = "CodeBurst"
-				show_CodeBurstArticles
-				article_selection_instructions
-				update_current_article_count("CodeBurst")
-				@@current_articles = DeveloperNewsCliApp::CodeBurstScrapper.articles
-				get_article_selection
-			when "exit"
-				goodbye
-			end
+		input = gets.strip
+		if input == "1"
+			@@current_website = "FreeCodeCamp"
+			show_FreeCodeCampArticles
+			update_current_article_count("FreeCodeCamp")
+			@@current_articles = DeveloperNewsCliApp::FreeCodeCampScrapper.articles
+			article_selection_instructions
+		elsif	input == "2"
+			@@current_website = "HackerNoon"
+			show_HackerNoonArticles
+			update_current_article_count("HackerNoon")
+			@@current_articles = DeveloperNewsCliApp::HackerNoonScrapper.articles
+			article_selection_instructions
+		elsif input == "3"
+			@@current_website = "CodeBurst"
+			show_CodeBurstArticles
+			update_current_article_count("CodeBurst")
+			@@current_articles = DeveloperNewsCliApp::CodeBurstScrapper.articles
+			article_selection_instructions
+		elsif input == "exit"
+			goodbye
+		elsif input == "list"
+			list_websites
+			initial_instructions
+		else
+			puts "I'm not sure what you meant."
+			list_websites
+			initial_instructions
 		end
 	end
 
@@ -90,16 +70,19 @@ class DeveloperNewsCliApp::CLI
 		puts "\nType the number of an article to see more information about it."
 		puts "Or type list to see a list of websites."
 		puts "Or type exit to end the program."
+		get_article_selection
 	end
 
 	def get_article_selection
 		input = nil
 		max_number = @@current_articles.count
-		input = gets.strip.to_i
-		if input <= max_number
+		input = gets.strip
+		if input.to_i <= max_number && input.to_i != 0
 			print_summary(@@current_articles[input.to_i - 1])
-		elsif input == 0
-			goodbye
+		elsif input == "list"
+			list_websites
+			initial_instructions
+		elsif input =="exit"
 		else
 			get_article_selection
 		end
@@ -125,9 +108,9 @@ class DeveloperNewsCliApp::CLI
 	end
 
 	def get_article_summary_input(article)
-		puts "Type read or r to open the article in your browser.\n
-		Type back to go back to the list of #{@@current_website} articles.\n
-		Type list to see a list of websites.\n
+		puts "Type read or r to open the article in your browser.
+		Type back to go back to the list of #{@@current_website} articles.
+		Type list to see a list of websites.
 		Type exit to exit the program."
 
 		input = gets.strip
@@ -138,17 +121,18 @@ class DeveloperNewsCliApp::CLI
 		when "back"
 			if @@current_website == "FreeCodeCamp"
 				show_FreeCodeCampArticles
-				initial_instructions
+				article_selection_instructions
 			elsif @@current_website == "HackerNoon"
 				show_HackerNoonArticles
-				initial_instructions
+				article_selection_instructions
 			else
 				show_CodeBurstArticles
-				initial_instructions
+				article_selection_instructions
 			end
 		when "list"
 			list_websites
 			initial_instructions
+			get_website_input
 		when "exit"
 			goodbye
 		else
@@ -178,12 +162,6 @@ class DeveloperNewsCliApp::CLI
 		end
 	end
 
-	def get_articles
-		DeveloperNewsCliApp::FreeCodeCampScrapper.new.make_article
-		DeveloperNewsCliApp::HackerNoonScrapper.new.make_article
-		DeveloperNewsCliApp::CodeBurstScrapper.new.make_article
-	end
-	
 	def list_articles
 		puts "Today's top developer articles:"
 		puts ""
@@ -201,47 +179,22 @@ class DeveloperNewsCliApp::CLI
 		DeveloperNewsCliApp::Article.add_to_current_artciles(DeveloperNewsCliApp::Article.display_top_three("CodeBurst"))
 	end
 
-	def site_articles(site)
-		case site
-		when "FCC"
-			DeveloperNewsCliApp::Article.display_articles("FreeCodeCamp")
-		when "HN"
-			DeveloperNewsCliApp::Article.display_articles("HackerNoon")
-		when "CB"
-			DeveloperNewsCliApp::Article.display_articles("CodeBurst")
-		end
-		puts ""
-		menu
+	def websites
+		@@websites
 	end
 
-
-	def list_site_articles
+	def current_article_count
+		@@current_article_count
 	end
 
-	def menu
-		input = nil
-		while input != "EXIT"
-			puts "Type the article number to see more info"
-			puts "Or type the website abbreviation to see its 10 most recent articles"
-			puts "Or type list to see the main list of articles"
-			puts "Or type exit to end the program"
-			input = gets.strip.upcase
-			
-			case input
-			when "1"
-				puts "Article 1..."
-			when "2"
-				puts "Article 2..."
-			when "FCC", "HN", "CB"
-				site_articles(input)
-			when "LIST"
-				list_articles
-			when "EXIT"
-				goodbye
-			else
-				puts "not sure what you meant.  type list, an article number, site abbreviation or exit"
-			end
-			puts ""
+	def update_current_article_count(website)
+		case website
+		when "FreeCodeCamp"
+			@@current_article_count = DeveloperNewsCliApp::FreeCodeCampScrapper.article_count
+		when "HackerNoon"
+			@@current_article_count = DeveloperNewsCliApp::HackerNoonScrapper.article_count
+		when "CodeBurst"
+			@@current_article_count = DeveloperNewsCliApp::CodeBurstScrapper.article_count
 		end
 	end
 
