@@ -24,7 +24,9 @@ class DeveloperNewsCliApp::CLI
 	end
 
 	def list_websites
+		puts ""
 		self.websites.each.with_index(1){|website, index| puts"#{index}. #{website}"}
+		puts ""
 	end
 
 	def initial_instructions
@@ -116,8 +118,8 @@ class DeveloperNewsCliApp::CLI
 		input = gets.strip
 		case input
 		when "r"
-			puts "REDING THE ARTILE!"
-			goodbye
+			open_url(article)
+			print_summary(article)
 		when "back"
 			if @@current_website == "FreeCodeCamp"
 				show_FreeCodeCampArticles
@@ -177,6 +179,11 @@ class DeveloperNewsCliApp::CLI
 		DeveloperNewsCliApp::Article.add_to_current_artciles(DeveloperNewsCliApp::Article.display_top_three("HackerNoon"))
 		puts "CodeBurst (CB)"
 		DeveloperNewsCliApp::Article.add_to_current_artciles(DeveloperNewsCliApp::Article.display_top_three("CodeBurst"))
+	end
+
+	def open_url(article)
+		# open #{DeveloperNewsCliApp::FreeCodeCampScrapper.articles[-1].url}
+		`open #{article.url}`
 	end
 
 	def websites
