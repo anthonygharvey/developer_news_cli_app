@@ -39,23 +39,11 @@ class DeveloperNewsCliApp::CLI
 		input = nil
 		input = gets.strip
 		if input == "1"
-			@@current_website = "FreeCodeCamp"
 			show_FreeCodeCampArticles
-			update_current_article_count("FreeCodeCamp")
-			@@current_articles = DeveloperNewsCliApp::FreeCodeCampScrapper.articles
-			article_selection_instructions
 		elsif	input == "2"
-			@@current_website = "HackerNoon"
 			show_HackerNoonArticles
-			update_current_article_count("HackerNoon")
-			@@current_articles = DeveloperNewsCliApp::HackerNoonScrapper.articles
-			article_selection_instructions
 		elsif input == "3"
-			@@current_website = "CodeBurst"
 			show_CodeBurstArticles
-			update_current_article_count("CodeBurst")
-			@@current_articles = DeveloperNewsCliApp::CodeBurstScrapper.articles
-			article_selection_instructions
 		elsif input == "exit"
 			goodbye
 		elsif input == "list"
@@ -84,7 +72,11 @@ class DeveloperNewsCliApp::CLI
 		elsif input == "list"
 			list_websites
 			initial_instructions
+		elsif	input.to_i > max_number
+			puts "I'm not sure what you meant."
+			article_selection_instructions
 		elsif input =="exit"
+			goodbye
 		else
 			get_article_selection
 		end
@@ -144,24 +136,36 @@ class DeveloperNewsCliApp::CLI
 	end
 
 	def show_FreeCodeCampArticles
+		@@current_website = "FreeCodeCamp"
+		update_current_article_count("FreeCodeCamp")
+		@@current_articles = DeveloperNewsCliApp::FreeCodeCampScrapper.articles
 		puts "\nFreeCodeCamp:\n"
 		DeveloperNewsCliApp::FreeCodeCampScrapper.articles.each.with_index(1) do |article, index|
 			puts "#{index}. #{article.title}"
 		end
+		article_selection_instructions
 	end
 
 	def show_HackerNoonArticles
+		@@current_website = "HackerNoon"
+		update_current_article_count("HackerNoon")
+		@@current_articles = DeveloperNewsCliApp::HackerNoonScrapper.articles
 		puts "\nHackerNoon:\n"
 		DeveloperNewsCliApp::HackerNoonScrapper.articles.each.with_index(1) do |article, index|
 			puts "#{index}. #{article.title}"
 		end
+		article_selection_instructions
 	end
 
 	def show_CodeBurstArticles
+		@@current_website = "CodeBurst"
+		update_current_article_count("CodeBurst")
+		@@current_articles = DeveloperNewsCliApp::CodeBurstScrapper.articles
 		puts "\nCodeBurst:\n"
 		DeveloperNewsCliApp::CodeBurstScrapper.articles.each.with_index(1) do |article, index|
 			puts "#{index}. #{article.title}"
 		end
+		article_selection_instructions
 	end
 
 	def list_articles
@@ -182,7 +186,6 @@ class DeveloperNewsCliApp::CLI
 	end
 
 	def open_url(article)
-		# open #{DeveloperNewsCliApp::FreeCodeCampScrapper.articles[-1].url}
 		`open #{article.url}`
 	end
 
