@@ -108,10 +108,10 @@ class DeveloperNewsCliApp::CLI
 	end
 
 	def get_article_summary_input(article)
-		puts "Type read or r to open the article in your browser.
-		Type back to go back to the list of #{@@current_website} articles.
-		Type list to see a list of websites.
-		Type exit to exit the program."
+		puts "\nType read or r to open the article in your browser."
+		puts "Type back to go back to the list of #{@@current_website} articles."
+		puts "Type list to see a list of websites."
+		puts "Type exit to exit the program."
 
 		input = gets.strip
 		case input
