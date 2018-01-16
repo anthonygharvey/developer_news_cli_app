@@ -120,7 +120,41 @@ class DeveloperNewsCliApp::CLI
 		end
 		if article.read_time != nil
 			puts "Read Time: #{article.read_time}"
-		end	
+		end
+		get_article_summary_input(article)
+	end
+
+	def get_article_summary_input(article)
+		puts "Type read or r to open the article in your browser.\n
+		Type back to go back to the list of #{@@current_website} articles.\n
+		Type list to see a list of websites.\n
+		Type exit to exit the program."
+
+		input = gets.strip
+		case input
+		when "r"
+			puts "REDING THE ARTILE!"
+			goodbye
+		when "back"
+			if @@current_website == "FreeCodeCamp"
+				show_FreeCodeCampArticles
+				initial_instructions
+			elsif @@current_website == "HackerNoon"
+				show_HackerNoonArticles
+				initial_instructions
+			else
+				show_CodeBurstArticles
+				initial_instructions
+			end
+		when "list"
+			list_websites
+			initial_instructions
+		when "exit"
+			goodbye
+		else
+			puts "I'm not sure what you meant."
+			get_article_summary_input(article)
+		end
 	end
 
 	def show_FreeCodeCampArticles
