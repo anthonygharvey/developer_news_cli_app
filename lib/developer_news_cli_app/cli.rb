@@ -109,10 +109,10 @@ class DeveloperNewsCliApp::CLI
 
 		input = gets.strip
 		case input
-		when "r"
+		when "r", "read"
 			open_url(article)
 			print_summary(article)
-		when "back"
+		when "b", "back"
 			if @@current_website == "FreeCodeCamp"
 				show_FreeCodeCampArticles
 				article_selection_instructions
