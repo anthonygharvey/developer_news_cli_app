@@ -17,7 +17,7 @@ class DeveloperNewsCliApp::HackerNoonScrapper
 			a.date = article.css("time").text
 			a.url = article.css("a").attribute("href").value
 			a.website = "HackerNoon"
-			a.trailing = article.css(".u-fontSize18").text
+			a.trailing = article.css(".u-fontSize18").text == "" ? nil : article.css(".u-fontSize18").text
 			@@all << a
 		end
 	end

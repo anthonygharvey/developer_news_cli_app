@@ -18,8 +18,8 @@ class DeveloperNewsCliApp::FreeCodeCampScrapper
 			a.read_time = article.css(".readingTime").attribute("title").value
 			a.url = article.css(".postArticle-readMore a").attribute("href").value
 			a.website = "FreeCodeCamp"
-			a.subtitle = article.css("h4").text
-			a.trailing = article.css("p").text
+			a.subtitle = article.css("h4").text == "" ? nil : article.css("h4").text
+			a.trailing = article.css("p").text == "" ? nil : article.css("p").text 
 			@@all << a
 		end
 	end

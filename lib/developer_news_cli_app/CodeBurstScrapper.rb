@@ -17,7 +17,7 @@ class DeveloperNewsCliApp::CodeBurstScrapper
 			a.date = article.css("time").text
 			a.url = article.css("a").attribute("href").value
 			a.website = "CodeBurst"
-			a.trailing = article.search(".u-fontSize18").text
+			a.trailing = article.search(".u-fontSize18").text == "" ? nil : article.search(".u-fontSize18").text
 			@@all << a
 		end
 	end
