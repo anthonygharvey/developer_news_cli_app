@@ -1,6 +1,4 @@
 class DeveloperNewsCliApp::Article
-	# should have a name, author, date, read-time, url, intro
-	# should belong to a website
 	attr_accessor :title, :author, :date, :read_time, :url, :website, :subtitle, :trailing
 
 	@@all = []
@@ -15,7 +13,6 @@ class DeveloperNewsCliApp::Article
 		@subtitle = subtile
 		@trailing = trailing
 		@@all << self
-		# @@current_articles << self
 	end
 
 	def self.all
@@ -44,7 +41,6 @@ class DeveloperNewsCliApp::Article
 		articles = []
 		self.all.each do |article|
 			if article.website == website
-				# puts "#{article.title} - #{article.website}"
 				articles << article
 			end
 		end
