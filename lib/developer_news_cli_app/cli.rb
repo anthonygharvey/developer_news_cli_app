@@ -1,5 +1,5 @@
 class DeveloperNewsCliApp::CLI
-	@@websites = ["FreeCodeCamp", "HackerNoon", "CodeBurst"]
+	@@websites = ["FreeCodeCamp", "HackerNoon", "CodeBurst", "A List Apart"]
 	@@current_article_count = 0
 	@@current_website = ""
 	@@current_articles = []
@@ -21,6 +21,7 @@ class DeveloperNewsCliApp::CLI
 		DeveloperNewsCliApp::FreeCodeCampScrapper.new.make_article
 		DeveloperNewsCliApp::HackerNoonScrapper.new.make_article
 		DeveloperNewsCliApp::CodeBurstScrapper.new.make_article
+		DeveloperNewsCliApp::AListApartScrapper.new.make_article
 	end
 
 	def list_websites
@@ -44,6 +45,8 @@ class DeveloperNewsCliApp::CLI
 			show_HackerNoonArticles
 		elsif input == "3"
 			show_CodeBurstArticles
+		elsif input == "4"
+			show_AListApartArticles
 		elsif input == "exit"
 			goodbye
 		elsif input == "list"
@@ -119,8 +122,11 @@ class DeveloperNewsCliApp::CLI
 			elsif @@current_website == "HackerNoon"
 				show_HackerNoonArticles
 				article_selection_instructions
-			else
+			elsif @@current_website == "CodeBurst"
 				show_CodeBurstArticles
+				article_selection_instructions
+			else
+				show_AListApartArticles
 				article_selection_instructions
 			end
 		when "list"
@@ -168,6 +174,17 @@ class DeveloperNewsCliApp::CLI
 		article_selection_instructions
 	end
 
+	def show_AListApartArticles
+		@@current_website = "AListApart"
+		update_current_article_count("AListApart")
+		@@current_articles = DeveloperNewsCliApp::AListApartScrapper.articles
+		puts "\nA List Apart:\n"
+		DeveloperNewsCliApp::AListApartScrapper.articles.each.with_index(1) do |article, index|
+			puts "#{index}. #{article.title}"
+		end
+		article_selection_instructions
+	end
+
 	def list_articles
 		puts "Today's top developer articles:"
 		puts ""
@@ -205,6 +222,8 @@ class DeveloperNewsCliApp::CLI
 			@@current_article_count = DeveloperNewsCliApp::HackerNoonScrapper.article_count
 		when "CodeBurst"
 			@@current_article_count = DeveloperNewsCliApp::CodeBurstScrapper.article_count
+		when "AListApart"
+			@@current_article_count = DeveloperNewsCliApp::AListApartScrapper.article_count
 		end
 	end
 
