@@ -38,13 +38,10 @@ class DeveloperNewsCliApp::Article
 	end
 
 	def self.website(website)
-		articles = []
-		self.all.each do |article|
+		self.all.collect do |article|
 			if article.website == website
-				articles << article
 			end
 		end
-		articles
 	end
 
 	def self.display_top_three(website)
