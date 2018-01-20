@@ -72,7 +72,7 @@ class DeveloperNewsCliApp::CLI
 		input = gets.strip
 		if input.to_i <= max_number && input.to_i != 0
 			print_summary(@@current_articles[input.to_i - 1])
-		elsif input == "list" || "l"
+		elsif input == "list" || input == "l"
 			list_websites
 			initial_instructions
 		elsif	input.to_i > max_number
