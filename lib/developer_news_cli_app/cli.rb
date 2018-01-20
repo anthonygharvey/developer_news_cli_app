@@ -61,7 +61,7 @@ class DeveloperNewsCliApp::CLI
 
 	def article_selection_instructions
 		puts "\nType the number of an article to see more information about it."
-		puts "Or type list to see a list of websites."
+		puts "Or type list or l to see a list of websites."
 		puts "Or type exit to end the program."
 		get_article_selection
 	end
@@ -72,7 +72,7 @@ class DeveloperNewsCliApp::CLI
 		input = gets.strip
 		if input.to_i <= max_number && input.to_i != 0
 			print_summary(@@current_articles[input.to_i - 1])
-		elsif input == "list"
+		elsif input == "list" || "l"
 			list_websites
 			initial_instructions
 		elsif	input.to_i > max_number
@@ -106,8 +106,8 @@ class DeveloperNewsCliApp::CLI
 
 	def get_article_summary_input(article)
 		puts "\nType read or r to open the article in your browser."
-		puts "Type back to go back to the list of #{@@current_website} articles."
-		puts "Type list to see a list of websites."
+		puts "Type back or b to go back to the list of #{@@current_website} articles."
+		puts "Type list or l to see a list of websites."
 		puts "Type exit to exit the program."
 
 		input = gets.strip
@@ -129,7 +129,7 @@ class DeveloperNewsCliApp::CLI
 				show_AListApartArticles
 				article_selection_instructions
 			end
-		when "list"
+		when "list", "l"
 			list_websites
 			initial_instructions
 			get_website_input
