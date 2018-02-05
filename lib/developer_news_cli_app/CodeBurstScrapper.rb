@@ -2,7 +2,7 @@ class DeveloperNewsCliApp::CodeBurstScrapper
 	@@all = []
 
 	def get_page
-		page = Nokogiri::HTML(open("https://codeburst.io/"))
+		Nokogiri::HTML(open("https://codeburst.io/"))
 	end
 
 	def get_articles

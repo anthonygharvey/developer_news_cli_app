@@ -2,7 +2,7 @@ class DeveloperNewsCliApp::HackerNoonScrapper
 	@@all = []
 
 	def get_page
-		page = Nokogiri::HTML(open("https://hackernoon.com/"))
+		Nokogiri::HTML(open("https://hackernoon.com/"))
 	end
 
 	def get_articles

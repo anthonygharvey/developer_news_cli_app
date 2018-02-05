@@ -2,7 +2,7 @@ class DeveloperNewsCliApp::AListApartScrapper
 	@@all = []
 
 	def get_page
-		page = Nokogiri::HTML(open("https://alistapart.com/articles"))
+		Nokogiri::HTML(open("https://alistapart.com/articles"))
 	end
 
 	def get_articles

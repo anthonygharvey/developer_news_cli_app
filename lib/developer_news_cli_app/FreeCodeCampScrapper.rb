@@ -2,7 +2,7 @@ class DeveloperNewsCliApp::FreeCodeCampScrapper
 	@@all = []
 
 	def get_page
-		page = Nokogiri::HTML(open("https://medium.freecodecamp.org/"))
+		Nokogiri::HTML(open("https://medium.freecodecamp.org/"))
 	end
 
 	def get_articles
