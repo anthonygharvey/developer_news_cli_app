@@ -8,7 +8,6 @@ class DeveloperNewsCliApp::CLI
 		welcome
 		get_articles
 		list_websites
-		initial_instructions
 		get_article_selection
 	end
 	
@@ -28,9 +27,6 @@ class DeveloperNewsCliApp::CLI
 		puts ""
 		self.websites.each.with_index(1){|website, index| puts"#{index}. #{website}"}
 		puts ""
-	end
-
-	def initial_instructions
 		puts "Please type the number of the website to see more of its articles"
 		puts "Or type exit to end the program"
 		get_website_input
@@ -51,11 +47,9 @@ class DeveloperNewsCliApp::CLI
 			goodbye
 		elsif input == "list"
 			list_websites
-			initial_instructions
 		else
 			puts "I'm not sure what you meant."
 			list_websites
-			initial_instructions
 		end
 	end
 
@@ -131,7 +125,7 @@ class DeveloperNewsCliApp::CLI
 			end
 		when "list", "l"
 			list_websites
-			initial_instructions
+			# initial_instructions
 			get_website_input
 		when "exit"
 			goodbye
