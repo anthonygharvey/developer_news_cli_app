@@ -1,5 +1,5 @@
 require 'pry'
-require 'nokogiri'
+require 'nokogiri' , '~> 1.8.2'
 require 'open-uri'
 
 require_relative '../lib/developer_news_cli_app/cli'
