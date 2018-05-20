@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["anthony@anthonygharvey.com"]
 
   spec.summary       = "An app to display current developer news"
-  spec.description   = "displays the most recent news from developer websites"
+  spec.description   = "A CLI app that displays the article information from FreeCodeCamp, HackerNoon, CodeBurst and A List Apart."
   spec.homepage      = "http://anthonygharvey.com"
   spec.license       = "MIT"
 

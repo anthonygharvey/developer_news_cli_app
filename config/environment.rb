@@ -1,5 +1,7 @@
+gem 'nokogiri', '~>1.8.2'
+
 require 'pry'
-require 'nokogiri' , '~> 1.8.2'
+require 'nokogiri'
 require 'open-uri'
 
 require_relative '../lib/developer_news_cli_app/cli'
