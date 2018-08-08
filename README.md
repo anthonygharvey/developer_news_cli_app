@@ -1,5 +1,7 @@
 # Developer News Cli App
 
+[![Downloads](https://ruby-gem-downloads-badge.herokuapp.com/developer_news_cli_app?type=total&?&style=social)](https://rubygems.org/gems/developer_news_cli_app)
+
 The Developer News Cli App is a Ruby gem that scrapes information about the articles on the homepages for FreeCodeCamp, HackerNoon, Codeburst and A List Apart.  The gem allows you to select a website and view the article headlines.  The app also allows you to select an article to see more information and read the article in your browser; all from the command line.
 
 ## Installation
